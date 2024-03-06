@@ -20,7 +20,21 @@ class Tree {
         // Sort the array and remove duplicates to ensure a balanced tree
         arr = Array.from(new Set(arr.sort((a, b) => a - b)));
 
-        return this._buildTreeHelper(arr, 0, arr.length - 1);
+        return this.insert(arr, 0, arr.length - 1);
+    }
+
+    insert(arr,start,end) {
+        if (start > end) {
+            return null;
+        }
+
+        const mid = Math.floor((start+end)/2);
+        const node = new Node(arr[mid]);
+
+        node.leftChild = this.insertNode(arr, start, mid-1);
+        node.rightChild = this.insertNode(arr, mid+1, end);
+
+        return node;
     }
 
     printTree() {
@@ -38,3 +52,6 @@ class Tree {
           };
     }
 }
+
+// Completed: Node, Tree, buildTree
+// Incomplete: insert, deleteItem, find, levelOrder, inOrder, preOrder, postOrder, height, depth, isBalanced, rebalance
