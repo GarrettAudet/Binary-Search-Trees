@@ -17,11 +17,12 @@ describe('Binary Search Tree', () => {
         expect(bst.root.rightChild.rightChild.attribute).toEqual(5);
     });
 
-    test('insert adds a new node correctly', () => {
-        bst = new Tree([2, 3, 4]); // Initially create a BST with these nodes
-        bst.insertNode([1, 5], 0, 1); // Attempt to insert new nodes; adjust the method as needed to fit this test
-        expect(bst.find(1).attribute).toEqual(1); // Implement find method to verify
-        expect(bst.find(5).attribute).toEqual(5);
+    test('insert adds new nodes correctly', () => {
+        const bst = new Tree([2, 3, 4]); // Initially create a BST with these nodes
+        bst.insertNode(1); // Correctly call insertNode for a single value
+        bst.insertNode(5); // Insert another node
+        expect(bst.find(1).attribute).toEqual(1); // Verify if the node with value 1 exists
+        expect(bst.find(5).attribute).toEqual(5); // Verify if the node with value 5 exists
     });
 
     test('deleteNode removes a node correctly', () => {

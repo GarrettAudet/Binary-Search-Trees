@@ -108,7 +108,21 @@ class Tree {
     }
 
     find(value) {
-        return null; 
+        return this.findRecursive(this.root, value);
+    }
+
+    findRecursive(node, value) {
+        if (node === null) {
+            return null;
+        }
+
+        if (value === node.attribute) {
+            return node;
+        } else if (value < node.attribute) {
+            return this.findRecursive(node.leftChild, value);
+        } else {
+            return this.findRecursive(node.rightChild, value);
+        }
     }
 
     printTree() {
