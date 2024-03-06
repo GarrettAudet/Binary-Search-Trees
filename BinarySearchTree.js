@@ -31,10 +31,68 @@ class Tree {
         const mid = Math.floor((start+end)/2);
         const node = new Node(arr[mid]);
 
-        node.leftChild = this.insertNode(arr, start, mid-1);
-        node.rightChild = this.insertNode(arr, mid+1, end);
+        node.leftChild = this.insert(arr, start, mid-1);
+        node.rightChild = this.insert(arr, mid+1, end);
 
         return node;
+    }
+
+    insertNode(value) {
+        if (this.root === null) {
+            this.root = value;
+        }  else if {
+            temp = node.leftChild;
+            temp.attribute = value;
+        }
+    }
+
+    // Delete a Node
+    deleteItem(root, value) {
+        this.root = this.deleteRecursively(this.root, value);
+    }
+
+    // Helper Function to Perform the Deletion Recursively
+    deleteRecursively(node,value) {
+
+        // Tree is Empty
+        if (node === null) {
+            return null;
+        }
+
+        // Recursively Find the Node
+        if (value < node.attribute) {
+            node.leftChild = this.deleteRecursively(node.leftChild,value);
+        } else if (value > node.attribute) {
+            node.rightChild = this.deleteRecursively(node.rightChild,value);
+        } else {
+
+            // Return appropriate Pathway
+            if (node.leftChild === null) {
+                return node.rightChild;
+            } else if (node.rightChild === null) {
+                return node.leftChild;
+            }
+
+            // Node with Children
+            let temp = this.findMinNode(node.richChild);
+            node.attribute = temp.attribute;
+
+            // Delete the Inorder Successor
+            node.rightChild = this.deleteRecursively(node.rightChild, temp.attribute);
+
+        }
+    }
+
+    findMinNode(node) {
+        let current = node;
+        while (current.leftChild != null) {
+            current = current.leftChild;
+        }
+        return current;
+    }
+
+    find(value) {
+        return null; 
     }
 
     printTree() {
@@ -42,16 +100,18 @@ class Tree {
             if (node === null) {
               return;
             }
-            if (node.right !== null) {
-              prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+            if (node.rightChild !== null) {
+              prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
             }
             console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-            if (node.left !== null) {
-              prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+            if (node.leftChild !== null) {
+              prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
             }
           };
     }
 }
 
-// Completed: Node, Tree, buildTree
-// Incomplete: insert, deleteItem, find, levelOrder, inOrder, preOrder, postOrder, height, depth, isBalanced, rebalance
+module.exports = { Node, Tree}
+
+// Completed: Node, Tree, buildTree, insert, deleteItem
+// Incomplete: find, levelOrder, inOrder, preOrder, postOrder, height, depth, isBalanced, rebalance

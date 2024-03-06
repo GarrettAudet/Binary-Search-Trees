@@ -1,0 +1,19 @@
+{
+  "name": "binary-search-trees",
+  "version": "1.0.0",
+  "description": "",
+  "main": "BinarySearchTree.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GarrettAudet/Binary-Search-Trees.git"
+  },
+  "author": "Garrett Audet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GarrettAudet/Binary-Search-Trees/issues"
+  },
+  "homepage": "https://github.com/GarrettAudet/Binary-Search-Trees#readme"
+}
