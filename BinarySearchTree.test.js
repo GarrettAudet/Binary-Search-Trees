@@ -19,7 +19,7 @@ describe('Binary Search Tree', () => {
 
     test('insert adds a new node correctly', () => {
         bst = new Tree([2, 3, 4]); // Initially create a BST with these nodes
-        bst.insert([1, 5], 0, 1); // Attempt to insert new nodes; adjust the method as needed to fit this test
+        bst.insertNode([1, 5], 0, 1); // Attempt to insert new nodes; adjust the method as needed to fit this test
         expect(bst.find(1).attribute).toEqual(1); // Implement find method to verify
         expect(bst.find(5).attribute).toEqual(5);
     });

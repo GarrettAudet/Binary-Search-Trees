@@ -38,11 +38,27 @@ class Tree {
     }
 
     insertNode(value) {
+        const newNode = new Node(value);
         if (this.root === null) {
-            this.root = value;
-        }  else if {
-            temp = node.leftChild;
-            temp.attribute = value;
+            this.root = newNode;
+            return;
+        }
+        
+        let current = this.root;
+        while (true) {
+            if (value < current.attribute) {
+                if (current.leftChild === null) {
+                    current.leftChild = newNode;
+                    break;
+                }
+                current = current.leftChild;
+            } else {
+                if (current.rightChild === null) {
+                    current.rightChild = newNode;
+                    break;
+                }
+                current = current.rightChild;
+            }
         }
     }
 
