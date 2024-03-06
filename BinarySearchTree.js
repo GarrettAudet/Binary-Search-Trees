@@ -63,12 +63,12 @@ class Tree {
     }
 
     // Delete a Node
-    deleteItem(root, value) {
+    deleteItem(value) {
         this.root = this.deleteRecursively(this.root, value);
     }
 
     // Helper Function to Perform the Deletion Recursively
-    deleteRecursively(node,value) {
+    deleteRecursively(node, value) {
 
         // Tree is Empty
         if (node === null) {
@@ -90,13 +90,13 @@ class Tree {
             }
 
             // Node with Children
-            let temp = this.findMinNode(node.richChild);
+            let temp = this.findMinNode(node.rightChild);
             node.attribute = temp.attribute;
 
             // Delete the Inorder Successor
             node.rightChild = this.deleteRecursively(node.rightChild, temp.attribute);
-
         }
+        return node;
     }
 
     findMinNode(node) {
