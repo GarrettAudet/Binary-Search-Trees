@@ -80,4 +80,18 @@ describe('Binary Search Tree', () => {
         const expectedAfterConstruction = [3, 1, 2, 4, 5];
         expect(resultAfterConstruction).toEqual(expectedAfterConstruction);
     });
+
+    test('postOrder Traversal Helper', () => {
+        const values = [3, 2, 1, 4, 5]; // Constructing a BST with these values
+        const bst = new Tree(values);
+
+        // Ensure the tree is constructed correctly
+        // For simplicity, we use in-order traversal to verify the structure
+        const resultAfterConstruction = bst.postOrder();
+        console.log("Tree after construction:", resultAfterConstruction);
+
+        // Expected order for a BST constructed from values should be in-order
+        const expectedAfterConstruction = [2, 1, 5, 4, 3];
+        expect(resultAfterConstruction).toEqual(expectedAfterConstruction);
+    });
 });

@@ -23,6 +23,7 @@ class Tree {
         return this.insert(arr, 0, arr.length - 1);
     }
 
+    // Function to Insert an Array into a Tree
     insert(arr, start, end) {
         // Base case: stop when start index exceeds end index
         if (start > end) {
@@ -42,6 +43,7 @@ class Tree {
         return node; // Return the constructed node
     }
 
+    // Function to Insert a Node into the Tree
     insertNode(value) {
         const newNode = new Node(value);
         if (this.root === null) {
@@ -104,6 +106,7 @@ class Tree {
         return node;
     }
 
+    // Function to Find the Minimum Node in a Tree
     findMinNode(node) {
         let current = node;
         while (current.leftChild != null) {
@@ -112,10 +115,12 @@ class Tree {
         return current;
     }
 
+    // Function to find a Value
     find(value) {
         return this.findRecursive(this.root, value);
     }
 
+    // Function to Search through a Tree for a Value
     findRecursive(node, value) {
         if (node === null) {
             return null;
@@ -130,12 +135,14 @@ class Tree {
         }
     }
 
-    callback (values) {
-        for (let i = 0; i < values.length; i++) {
-            console.log(values[i]);
+    // Function to Print the Traversal of the Tree
+    callback (result) {
+        for (let i = 0; i < result.length; i++) {
+            console.log(result[i]);
         }
     }
 
+    // Function to do Level Order Traversal
     levelOrder (callback = null) {
         if (!this.root) return null; // If there isn't a tree then return a null value
         
@@ -156,12 +163,12 @@ class Tree {
 
         if (callback) {
             callback(result);
-            return null;
-        } else {
-            return result;
-        }
+        } 
+
+        return result;
     }
 
+    // Function to do inOrder Traversal
     inOrder(callback) {
         let result = [];
 
@@ -178,12 +185,12 @@ class Tree {
 
         if (callback) {
             callback(result);
-            return null;
-        } else {
-            return result;
-        }
+        } 
+
+        return result;
     }
 
+    // Function to do a Pre-Order Traversal
     preOrder(callback) {
         let result = [];
 
@@ -200,14 +207,31 @@ class Tree {
 
         if (callback) {
             callback(result);
-            return null;
-        } else {
-            return result;
-        }
+        } 
+
+        return result;
     }
 
     postOrder(callback) {
+        let result = [];
 
+        const postOrderTraversalHelper = (node) => {
+            if (node ===null) {
+                return null;
+            }
+            postOrderTraversalHelper(node.leftChild);
+            postOrderTraversalHelper(node.rightChild)
+            console.log(node.attribute);
+            result.push(node.attribute);
+        }
+
+        postOrderTraversalHelper(this.root);
+
+        if (callback) {
+            callback(result);
+        } 
+
+        return result;
     }
 
     height(node) {
@@ -241,6 +265,9 @@ class Tree {
     }
 }
 
-
+const values = [3, 2, 1, 4, 5];
+const bst = new Tree(values);
+const bstTraversal = bst.postOrder();
+console.log(bstTraversal);
 
 module.exports = { Node, Tree}
