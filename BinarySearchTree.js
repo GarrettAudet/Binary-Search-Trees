@@ -261,9 +261,26 @@ class Tree {
         return depth;
     }
 
-    isBalanced() {
-
+    isBalanced(node = this.root) {
+        if (node === null) {
+            return true; // A null tree is balanced
+        }
+    
+        // Use the height function to get the height of left and right subtrees
+        let leftHeight = this.height(node.leftChild);
+        let rightHeight = this.height(node.rightChild);
+    
+        // Calculate the difference in heights
+        let heightDiff = Math.abs(leftHeight - rightHeight);
+    
+        // Check the balance condition at the current node and recursively for all nodes
+        if (heightDiff <= 1 && this.isBalanced(node.leftChild) && this.isBalanced(node.rightChild)) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    
 
     rebalance() {
 

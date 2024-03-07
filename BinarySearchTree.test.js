@@ -143,4 +143,11 @@ describe('Binary Search Tree', () => {
         const nodeFiveHeight = bst.depth(nodeFive);
         expect(nodeFiveHeight).toEqual(2);
     });
+
+    test('Determine Balanced Tree', () => {
+        const values = [3, 2, 1, 4, 5]; // Constructing a BST with these values
+        const bst = new Tree(values);
+        const balanced = bst.isBalanced();
+        expect(balanced).toEqual(true);
+    });
 });
