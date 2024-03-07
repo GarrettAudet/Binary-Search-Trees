@@ -117,4 +117,30 @@ describe('Binary Search Tree', () => {
         const nodeTwoHeight = bst.height(nodeTwo);
         expect(nodeTwoHeight).toEqual(0);
     });
+
+    test('Depth Helper', () => {
+        const values = [3, 2, 1, 4, 5]; // Constructing a BST with these values
+        const bst = new Tree(values);
+
+        // Root
+        const nodeThree = bst.find(3);
+        const nodeThreeHeight = bst.depth(nodeThree);
+        expect(nodeThreeHeight).toEqual(0);
+
+        // First-Level
+        const nodeOne = bst.find(1);
+        const nodeOneHeight = bst.depth(nodeOne);
+        expect(nodeOneHeight).toEqual(1);
+        const nodeFour = bst.find(4);
+        const nodeFourHeight = bst.depth(nodeFour);
+        expect(nodeFourHeight).toEqual(1);
+
+        // Second-Level
+        const nodeTwo = bst.find(2);
+        const nodeTwoHeight = bst.depth(nodeTwo);
+        expect(nodeTwoHeight).toEqual(2);
+        const nodeFive = bst.find(5);
+        const nodeFiveHeight = bst.depth(nodeFive);
+        expect(nodeFiveHeight).toEqual(2);
+    });
 });

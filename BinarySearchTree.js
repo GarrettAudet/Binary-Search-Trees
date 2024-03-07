@@ -1,8 +1,9 @@
 class Node {
-    constructor(attribute) {
+    constructor(attribute, parent = null) {
         this.attribute = attribute;
         this.leftChild = null;
         this.rightChild = null;
+        this.parent = parent;
     }
 }
 
@@ -24,7 +25,7 @@ class Tree {
     }
 
     // Function to Insert an Array into a Tree
-    insert(arr, start, end) {
+    insert(arr, start, end, parent = null) {
         // Base case: stop when start index exceeds end index
         if (start > end) {
             return null;
@@ -34,11 +35,11 @@ class Tree {
         const mid = Math.floor((start + end) / 2);
     
         // Create a new node with the value at the middle index
-        const node = new Node(arr[mid]);
+        const node = new Node(arr[mid], parent);
     
         // Recursively build left and right subtrees
-        node.leftChild = this.insert(arr, start, mid - 1); // Left subtree: start to mid-1
-        node.rightChild = this.insert(arr, mid + 1, end); // Right subtree: mid+1 to end
+        node.leftChild = this.insert(arr, start, mid - 1, node); // Left subtree: start to mid-1
+        node.rightChild = this.insert(arr, mid + 1, end, node); // Right subtree: mid+1 to end
     
         return node; // Return the constructed node
     }
@@ -56,12 +57,14 @@ class Tree {
             if (value < current.attribute) {
                 if (current.leftChild === null) {
                     current.leftChild = newNode;
+                    newNode.parent = current;
                     break;
                 }
                 current = current.leftChild;
             } else {
                 if (current.rightChild === null) {
                     current.rightChild = newNode;
+                    newNode.parent = current;
                     break;
                 }
                 current = current.rightChild;
@@ -246,7 +249,16 @@ class Tree {
     }
 
     depth(node) {
-
+        if (node === null) {
+            return -1; // Node not found
+        }
+    
+        let depth = 0;
+        while (node.parent !== null) {
+            depth++;
+            node = node.parent;
+        }
+        return depth;
     }
 
     isBalanced() {
