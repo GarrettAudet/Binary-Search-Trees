@@ -235,7 +235,14 @@ class Tree {
     }
 
     height(node) {
+        if (node === null) {
+            return -1;
+        }
 
+        let leftHeight = this.height(node.leftChild);
+        let rightHeight = this.height(node.rightChild);
+
+        return 1 + Math.max(leftHeight, rightHeight);
     }
 
     depth(node) {
@@ -263,11 +270,7 @@ class Tree {
         };
         printNode(this.root);
     }
-}
 
-const values = [3, 2, 1, 4, 5];
-const bst = new Tree(values);
-const bstTraversal = bst.postOrder();
-console.log(bstTraversal);
+}
 
 module.exports = { Node, Tree}

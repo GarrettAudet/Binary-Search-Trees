@@ -94,4 +94,27 @@ describe('Binary Search Tree', () => {
         const expectedAfterConstruction = [2, 1, 5, 4, 3];
         expect(resultAfterConstruction).toEqual(expectedAfterConstruction);
     });
+
+    test('Height Helper', () => {
+        const values = [3, 2, 1, 4, 5]; // Constructing a BST with these values
+        const bst = new Tree(values);
+
+        // Ensure the tree is constructed correctly
+        // For simplicity, we use in-order traversal to verify the structure
+        const nodeFive = bst.find(5);
+        const nodeFiveHeight = bst.height(nodeFive);
+        expect(nodeFiveHeight).toEqual(0);
+        const nodeFour = bst.find(4);
+        const nodeFourHeight = bst.height(nodeFour);
+        expect(nodeFourHeight).toEqual(1);
+        const nodeThree = bst.find(3);
+        const nodeThreeHeight = bst.height(nodeThree);
+        expect(nodeThreeHeight).toEqual(2);
+        const nodeOne = bst.find(1);
+        const nodeOneHeight = bst.height(nodeOne);
+        expect(nodeOneHeight).toEqual(1);
+        const nodeTwo = bst.find(2);
+        const nodeTwoHeight = bst.height(nodeTwo);
+        expect(nodeTwoHeight).toEqual(0);
+    });
 });
