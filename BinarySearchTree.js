@@ -18,7 +18,6 @@ class Tree {
         }
         // Sort the array and remove duplicates to ensure a balanced tree
         arr = Array.from(new Set(arr.sort((a, b) => a - b)));
-        console.log('This is the sorted array' + arr);
 
         // Add Nodes to Tree
         return this.insert(arr, 0, arr.length - 1);
@@ -164,7 +163,19 @@ class Tree {
     }
 
     inOrder(callback) {
+        let result = [];
 
+        const inOrderTraversalHelper = (node) => {
+            if (node ===null) {
+                return null;
+            }
+            inOrderTraversalHelper(node.leftChild);
+            result.push(node.attribute);
+            inOrderTraversalHelper(node.rightChild);
+        }
+
+        inOrderTraversalHelper(this.root);
+        return result;
     }
 
     preOrder(callback) {
@@ -206,9 +217,6 @@ class Tree {
     }
 }
 
-const values = [3, 2, 4, 1, 5];
-const bst = new Tree(values);
-const levelOrder = bst.levelOrder();
-console.log(levelOrder);
+
 
 module.exports = { Node, Tree}
