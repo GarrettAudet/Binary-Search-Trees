@@ -140,11 +140,11 @@ class Tree {
         if (!this.root) return null; // If there isn't a tree then return a null value
         
         let queue = [this.root];
-        const values = [];
+        const result = [];
 
         while (queue.length > 0) {
             let currentNode = queue.shift() // Remove a node from the queue 
-            values.push(currentNode.attribute);
+            result.push(currentNode.attribute);
 
             if (currentNode.leftChild) { // Push left child into queue
                 queue.push(currentNode.leftChild);
@@ -155,10 +155,10 @@ class Tree {
         }
 
         if (callback) {
-            callback(values);
+            callback(result);
             return null;
         } else {
-            return values;
+            return result;
         }
     }
 
@@ -175,11 +175,35 @@ class Tree {
         }
 
         inOrderTraversalHelper(this.root);
-        return result;
+
+        if (callback) {
+            callback(result);
+            return null;
+        } else {
+            return result;
+        }
     }
 
     preOrder(callback) {
+        let result = [];
 
+        const preOrderTraversalHelper = (node) => {
+            if (node ===null) {
+                return null;
+            }
+            result.push(node.attribute);
+            preOrderTraversalHelper(node.leftChild);
+            preOrderTraversalHelper(node.rightChild);
+        }
+
+        preOrderTraversalHelper(this.root);
+
+        if (callback) {
+            callback(result);
+            return null;
+        } else {
+            return result;
+        }
     }
 
     postOrder(callback) {
