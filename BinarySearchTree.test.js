@@ -150,4 +150,40 @@ describe('Binary Search Tree', () => {
         const balanced = bst.isBalanced();
         expect(balanced).toEqual(true);
     });
+
+    test("Testing Tree Function", () => {
+        const values = [];
+        let randomArray = Math.floor(Math.random() * (10 - 8 + 1)) + 8; 
+
+        for (let i = 0; i < randomArray; i++) {
+            const randomNumber = Math.floor(Math.random() * 101);
+            values.push(randomNumber);
+        }
+
+        const bst = new Tree(values);
+        let balanced = bst.isBalanced();
+        expect(balanced).toEqual(true);
+        console.log(bst.levelOrder());
+        console.log(bst.inOrder());
+        console.log(bst.preOrder());
+        console.log(bst.postOrder());
+
+        randomArray = Math.floor(Math.random() * 5) + 1;
+        for (let x = 0; x < randomArray; x++) {
+            const randomNumber = Math.floor(Math.random() * 50 ) + 101;
+            bst.insertNode(randomNumber);
+        }
+
+        balanced = bst.isBalanced();
+        expect(balanced).toEqual(false);
+
+        bst.rebalance();
+        balanced = bst.isBalanced();
+        expect(balanced).toEqual(true);
+
+        console.log(bst.levelOrder());
+        console.log(bst.inOrder());
+        console.log(bst.preOrder());
+        console.log(bst.postOrder());
+    });
 });
