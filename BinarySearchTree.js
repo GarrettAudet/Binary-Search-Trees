@@ -172,7 +172,7 @@ class Tree {
     }
 
     // Function to do inOrder Traversal
-    inOrder(callback) {
+    inOrder(callback = null) {
         let result = [];
 
         const inOrderTraversalHelper = (node) => {
@@ -283,7 +283,11 @@ class Tree {
     
 
     rebalance() {
-
+        // Collect all values in the tree in sorted order
+        let sortedValues = this.inOrder();
+    
+        // Rebuild the tree from the sorted list
+        this.root = this.buildTree(sortedValues);
     }
 
     printTree() {
@@ -302,4 +306,4 @@ class Tree {
 
 }
 
-module.exports = { Node, Tree}
+module.exports = { Node, Tree }
