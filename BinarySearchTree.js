@@ -16,25 +16,31 @@ class Tree {
         if (!arr.length) {
             return null;
         }
-
         // Sort the array and remove duplicates to ensure a balanced tree
         arr = Array.from(new Set(arr.sort((a, b) => a - b)));
+        console.log('This is the sorted array' + arr);
 
+        // Add Nodes to Tree
         return this.insert(arr, 0, arr.length - 1);
     }
 
-    insert(arr,start,end) {
+    insert(arr, start, end) {
+        // Base case: stop when start index exceeds end index
         if (start > end) {
             return null;
         }
-
-        const mid = Math.floor((start+end)/2);
+    
+        // Calculate the middle index
+        const mid = Math.floor((start + end) / 2);
+    
+        // Create a new node with the value at the middle index
         const node = new Node(arr[mid]);
-
-        node.leftChild = this.insert(arr, start, mid-1);
-        node.rightChild = this.insert(arr, mid+1, end);
-
-        return node;
+    
+        // Recursively build left and right subtrees
+        node.leftChild = this.insert(arr, start, mid - 1); // Left subtree: start to mid-1
+        node.rightChild = this.insert(arr, mid + 1, end); // Right subtree: mid+1 to end
+    
+        return node; // Return the constructed node
     }
 
     insertNode(value) {
@@ -186,19 +192,23 @@ class Tree {
     }
 
     printTree() {
-        const prettyPrint = (node, prefix = "", isLeft = true) => {
+        const printNode = (node, prefix = "", isLeft = true) => {
             if (node === null) {
-              return;
+                return;
             }
-            if (node.rightChild !== null) {
-              prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
+            console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.attribute}`);
+            if (node.leftChild !== null || node.rightChild !== null) {
+                printNode(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
+                printNode(node.rightChild, `${prefix}${isLeft ? "    " : "│   "}`, false);
             }
-            console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-            if (node.leftChild !== null) {
-              prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
-            }
-          };
+        };
+        printNode(this.root);
     }
 }
+
+const values = [3, 2, 4, 1, 5];
+const bst = new Tree(values);
+const levelOrder = bst.levelOrder();
+console.log(levelOrder);
 
 module.exports = { Node, Tree}

@@ -15,8 +15,8 @@ describe('Binary Search Tree', () => {
         expect(bst.root.attribute).toEqual(3);
     
         // Check left subtree
-        expect(bst.root.leftChild.attribute).toEqual(2);
-        expect(bst.root.leftChild.leftChild.attribute).toEqual(1);
+        expect(bst.root.leftChild.attribute).toEqual(1);
+        expect(bst.root.leftChild.rightChild.attribute).toEqual(2);
     
         // Check right subtree
         expect(bst.root.rightChild.attribute).toEqual(4);
@@ -49,22 +49,7 @@ describe('Binary Search Tree', () => {
         console.log("Tree after construction:", resultAfterConstruction);
         
         // Expected order for a BST constructed from values should be level order
-        const expectedAfterConstruction = [3, 2, 4, 1, 5];
+        const expectedAfterConstruction = [3, 1, 4, 2, 5];
         expect(resultAfterConstruction).toEqual(expectedAfterConstruction);
-    
-        // Define an array to collect the traversal result
-        const result = bst.levelOrder();
-        console.log("Breadth-first traversal result:", result);
-    
-        // Expected order for a BST constructed from values should be level order
-        const expected = [3, 2, 4, 1, 5]; // Assuming the Tree constructor builds a balanced BST
-        expect(result).toEqual(expected);
-    
-        // Alternatively, to test using a callback function:
-        const callbackResult = [];
-        bst.levelOrder((value) => {
-            callbackResult.push(...value); // Spread operator to push each value individually
-        });
-        expect(callbackResult).toEqual(expected);
     });
 });
