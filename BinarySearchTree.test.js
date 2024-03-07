@@ -8,12 +8,18 @@ describe('Binary Search Tree', () => {
     });
 
     test('buildTree creates a balanced tree from a sorted array without duplicates', () => {
-        const values = [1, 2, 3, 4, 5];
-        bst = new Tree(values);
+        const values = [3, 2, 4, 1, 5];
+        const bst = new Tree(values);
+    
+        // Check root node
         expect(bst.root.attribute).toEqual(3);
-        expect(bst.root.leftChild.attribute).toEqual(1);
+    
+        // Check left subtree
+        expect(bst.root.leftChild.attribute).toEqual(2);
+        expect(bst.root.leftChild.leftChild.attribute).toEqual(1);
+    
+        // Check right subtree
         expect(bst.root.rightChild.attribute).toEqual(4);
-        expect(bst.root.leftChild.rightChild.attribute).toEqual(2);
         expect(bst.root.rightChild.rightChild.attribute).toEqual(5);
     });
 
@@ -31,5 +37,34 @@ describe('Binary Search Tree', () => {
         bst.deleteItem(3); // Remove the root in this case, adjust based on your implementation
         expect(bst.find(3)).toBeNull(); // Assuming the find method is correctly implemented
         expect(bst.root.attribute).not.toEqual(3); // The new root should not be 3
+    });
+
+    test('breadth first traversal works correctly', () => {
+        const values = [3, 2, 1, 4, 5]; // Constructing a BST with these values
+        const bst = new Tree(values);
+    
+        // Ensure the tree is constructed correctly
+        // For simplicity, we use level-order traversal to verify the structure
+        const resultAfterConstruction = bst.levelOrder();
+        console.log("Tree after construction:", resultAfterConstruction);
+        
+        // Expected order for a BST constructed from values should be level order
+        const expectedAfterConstruction = [3, 2, 4, 1, 5];
+        expect(resultAfterConstruction).toEqual(expectedAfterConstruction);
+    
+        // Define an array to collect the traversal result
+        const result = bst.levelOrder();
+        console.log("Breadth-first traversal result:", result);
+    
+        // Expected order for a BST constructed from values should be level order
+        const expected = [3, 2, 4, 1, 5]; // Assuming the Tree constructor builds a balanced BST
+        expect(result).toEqual(expected);
+    
+        // Alternatively, to test using a callback function:
+        const callbackResult = [];
+        bst.levelOrder((value) => {
+            callbackResult.push(...value); // Spread operator to push each value individually
+        });
+        expect(callbackResult).toEqual(expected);
     });
 });

@@ -125,6 +125,66 @@ class Tree {
         }
     }
 
+    callback (values) {
+        for (let i = 0; i < values.length; i++) {
+            console.log(values[i]);
+        }
+    }
+
+    levelOrder (callback = null) {
+        if (!this.root) return null; // If there isn't a tree then return a null value
+        
+        let queue = [this.root];
+        const values = [];
+
+        while (queue.length > 0) {
+            let currentNode = queue.shift() // Remove a node from the queue 
+            values.push(currentNode.attribute);
+
+            if (currentNode.leftChild) { // Push left child into queue
+                queue.push(currentNode.leftChild);
+            }
+            if (currentNode.rightChild) { // Push right child into queue
+                queue.push(currentNode.rightChild);
+            }
+        }
+
+        if (callback) {
+            callback(values);
+            return null;
+        } else {
+            return values;
+        }
+    }
+
+    inOrder(callback) {
+
+    }
+
+    preOrder(callback) {
+
+    }
+
+    postOrder(callback) {
+
+    }
+
+    height(node) {
+
+    }
+
+    depth(node) {
+
+    }
+
+    isBalanced() {
+
+    }
+
+    rebalance() {
+
+    }
+
     printTree() {
         const prettyPrint = (node, prefix = "", isLeft = true) => {
             if (node === null) {
@@ -142,6 +202,3 @@ class Tree {
 }
 
 module.exports = { Node, Tree}
-
-// Completed: Node, Tree, buildTree, insert, deleteItem
-// Incomplete: find, levelOrder, inOrder, preOrder, postOrder, height, depth, isBalanced, rebalance
